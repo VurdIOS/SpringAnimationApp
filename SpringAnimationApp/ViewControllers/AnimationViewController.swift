@@ -30,6 +30,7 @@ final class AnimationViewController: UIViewController {
         
         runButton.setTitle("Run", for: .normal)
         
+        // Захардкодил первый экран с такими параметрами
         presetLabel.text = "Preset: shake"
         curveLabel.text = "Curve: linear"
         forceLabel.text = "Force: 1.4"
@@ -39,7 +40,8 @@ final class AnimationViewController: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func runAnimationButton() {
-        
+        // Условный оператор который при первом нажатии на кнопку вызывает стартовую
+        // анимацию, далее меняется текст кнопки и анимация генерируется из модели
         if runButton.currentTitle == "Run" {
             firstAnimation()
         } else {
@@ -50,6 +52,7 @@ final class AnimationViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+        // Метод для первой настройки первой захардкоженной анимации
     private func firstAnimation() {
         animationView.animation = "shake"
         animationView.curve = "linear"
@@ -58,7 +61,9 @@ final class AnimationViewController: UIViewController {
         animationView.delay = 0.4
         animationView.animate()
     }
-    
+        // Метод для генерации анимаций. Пресет и кривую беру из модели, остальное
+        // генерирую по месту
+        // Строки не переносил, потому что посчитал что так читабильнее
     private func getRandomAnimation() {
         animationView.animation = randomAnimations.preset[Int.random(in: 0..<randomAnimations.preset.count)]
         animationView.curve = randomAnimations.curve[Int.random(in: 0..<randomAnimations.curve.count)]
@@ -67,7 +72,7 @@ final class AnimationViewController: UIViewController {
         animationView.delay = CGFloat.random(in: 0.3...1)
         animationView.animate()
     }
-    
+    // Метод для настройки текста во вьюхе анимации
     private func setLabels() {
         presetLabel.text = "Preset: \(animationView.animation)"
         curveLabel.text = "Curve: \(animationView.curve)"
@@ -76,3 +81,4 @@ final class AnimationViewController: UIViewController {
         delayLabel.text = "Delay: \(String(format: "%.2f", animationView.delay))"
     }
 }
+// Пока не смог реализовать название следующей анимации в кнопке...
