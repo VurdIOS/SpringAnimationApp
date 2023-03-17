@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - RandomAnimation
 struct randomAnimation {
     let preset: [String]
     let curve: [String]

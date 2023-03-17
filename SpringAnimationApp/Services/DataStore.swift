@@ -4,6 +4,7 @@
 //
 //  Created by Камаль Атавалиев on 17.03.2023.
 //
+// MARK: - DataStore
 final class DataStore {
     
     static let shared = DataStore()

@@ -7,9 +7,10 @@
 
 import UIKit
 import SpringAnimation
-
+// MARK: - AnimationViewController
 final class AnimationViewController: UIViewController {
     
+    // MARK: - IB Outlet
     @IBOutlet var animationView: SpringView!
     
     @IBOutlet var presetLabel: UILabel!
@@ -20,8 +21,10 @@ final class AnimationViewController: UIViewController {
     
     @IBOutlet var runButton: UIButton!
     
+    // MARK: - Public Properties
     let randomAnimations = randomAnimation.generateAnimation()
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +37,8 @@ final class AnimationViewController: UIViewController {
         delayLabel.text = "Delay: 0.4"
     }
     
-    
+    // MARK: - IB Actions
     @IBAction func runAnimationButton() {
-        
-        
         
         if runButton.currentTitle == "Run" {
             firstAnimation()
@@ -45,10 +46,10 @@ final class AnimationViewController: UIViewController {
             getRandomAnimation()
             setLabels()
         }
-        
         runButton.setTitle("Next", for: .normal)
     }
     
+    // MARK: - Private Methods
     private func firstAnimation() {
         animationView.animation = "shake"
         animationView.curve = "linear"
@@ -57,17 +58,14 @@ final class AnimationViewController: UIViewController {
         animationView.delay = 0.4
         animationView.animate()
     }
+    
     private func getRandomAnimation() {
-        
-        
         animationView.animation = randomAnimations.preset[Int.random(in: 0..<randomAnimations.preset.count)]
         animationView.curve = randomAnimations.curve[Int.random(in: 0..<randomAnimations.curve.count)]
         animationView.force = CGFloat.random(in: 0.1...2)
-        animationView.duration = CGFloat.random(in: 0...2)
+        animationView.duration = CGFloat.random(in: 0.2...2)
         animationView.delay = CGFloat.random(in: 0.3...1)
         animationView.animate()
-        
-        
     }
     
     private func setLabels() {
@@ -77,5 +75,4 @@ final class AnimationViewController: UIViewController {
         durationLabel.text = "Duration: \(String(format: "%.2f", animationView.duration))"
         delayLabel.text = "Delay: \(String(format: "%.2f", animationView.delay))"
     }
-    
 }
