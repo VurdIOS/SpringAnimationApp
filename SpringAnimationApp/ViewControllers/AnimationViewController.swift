@@ -42,7 +42,9 @@ final class AnimationViewController: UIViewController {
     @IBAction func runAnimationButton() {
         // Условный оператор который при первом нажатии на кнопку вызывает стартовую
         // анимацию, далее меняется текст кнопки и анимация генерируется из модели
+        
         // Далее меняется название кнопки на название следующей анимации
+        
         // Есть подозрение что каждый раз при нажатии на кнопку производить проверку
         // это туМач, не придумал пока как это обойти
         if runButton.currentTitle == "Run" {
@@ -67,6 +69,7 @@ final class AnimationViewController: UIViewController {
     }
         // Метод для генерации анимаций.Кривую беру напрямую из модели, пресет забираю из кнопки, остальное
         // генерирую по месту
+    
         // Строки не переносил, потому что посчитал что так читабильнее
     private func getRandomAnimation() {
         animationView.animation = runButton.currentTitle ?? "Next"
