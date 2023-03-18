@@ -15,8 +15,8 @@ struct randomAnimation {
     
     static func generateAnimation() -> randomAnimation {
         
-        let presets = DataStore.shared.presets
-        let curve = DataStore.shared.curve
+        let presets = DataStore.shared().presets
+        let curve = DataStore.shared().curve
 
         
         return randomAnimation(

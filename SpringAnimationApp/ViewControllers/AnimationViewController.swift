@@ -42,13 +42,17 @@ final class AnimationViewController: UIViewController {
     @IBAction func runAnimationButton() {
         // Условный оператор который при первом нажатии на кнопку вызывает стартовую
         // анимацию, далее меняется текст кнопки и анимация генерируется из модели
+        // Далее меняется название кнопки на название следующей анимации
+        // Есть подозрение что каждый раз при нажатии на кнопку производить проверку
+        // это туМач, не придумал пока как это обойти
         if runButton.currentTitle == "Run" {
             firstAnimation()
         } else {
             getRandomAnimation()
             setLabels()
         }
-        runButton.setTitle("Next", for: .normal)
+        runButton.setTitle(randomAnimations.preset[
+            Int.random(in: 0..<randomAnimations.preset.count)], for: .normal)
     }
     
     // MARK: - Private Methods
@@ -61,11 +65,11 @@ final class AnimationViewController: UIViewController {
         animationView.delay = 0.4
         animationView.animate()
     }
-        // Метод для генерации анимаций. Пресет и кривую беру из модели, остальное
+        // Метод для генерации анимаций.Кривую беру напрямую из модели, пресет забираю из кнопки, остальное
         // генерирую по месту
         // Строки не переносил, потому что посчитал что так читабильнее
     private func getRandomAnimation() {
-        animationView.animation = randomAnimations.preset[Int.random(in: 0..<randomAnimations.preset.count)]
+        animationView.animation = runButton.currentTitle ?? "Next"
         animationView.curve = randomAnimations.curve[Int.random(in: 0..<randomAnimations.curve.count)]
         animationView.force = CGFloat.random(in: 0.1...2)
         animationView.duration = CGFloat.random(in: 0.2...2)
@@ -81,4 +85,3 @@ final class AnimationViewController: UIViewController {
         delayLabel.text = "Delay: \(String(format: "%.2f", animationView.delay))"
     }
 }
-// Пока не смог реализовать название следующей анимации в кнопке...

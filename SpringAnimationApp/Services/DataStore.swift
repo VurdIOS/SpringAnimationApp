@@ -6,9 +6,18 @@
 //
 // MARK: - DataStore
 final class DataStore {
+    // Реализовал локальную синглтон базу
+    // В группе читал что есть замечания что сингтон реализовывают не в полном
+    // обьеме, поэтому вычитал в интернете про uniqueInstance
+    private static var uniqueInstance: DataStore?
     
-    static let shared = DataStore()
-    
+    static func shared() -> DataStore {
+        if uniqueInstance == nil {
+            uniqueInstance = DataStore()
+        }
+        return uniqueInstance!
+    }
+    // Некоторые анимации подразумевают исчезновение, потом нужно будет перебрать
     let presets = [
         "pop",
         "slideLeft",
@@ -70,4 +79,5 @@ final class DataStore {
          "easeOutBack",
          "easeInOutBack"
     ]
+    private init () {}
 }
